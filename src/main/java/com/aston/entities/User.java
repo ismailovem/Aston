@@ -1,12 +1,10 @@
-package com.aston.entity;
+package com.aston.entities;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.TreeMap;
 
 public class User {
     private String userName;
-    private TreeMap accaunts;
+    private TreeMap accaunt;
 
     public User(String userName) {
         this.userName = userName;
