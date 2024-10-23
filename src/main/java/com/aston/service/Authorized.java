@@ -4,8 +4,13 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Authorized {
+    private HashMap<String,Double> hashMap;
 
-    public String autorizationMethod(HashMap<String,Double> hashMap){
+    public Authorized(HashMap<String, Double> hashMap) {
+        this.hashMap = hashMap;
+    }
+
+    public String autorizationMethod(){
         Scanner scan = new Scanner(System.in);
         String fullName;
 

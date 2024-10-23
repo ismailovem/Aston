@@ -1,6 +1,7 @@
 package com.aston.service;
 
-import java.util.Date;
+import com.aston.entities.User;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -8,6 +9,8 @@ public class Greeting {
     private HashMap<String,Double> hashMap;
     private Registration registration;
     private Authorized authorized;
+    //private User user;
+
 
     private void waiting() {
         try {
@@ -15,6 +18,10 @@ public class Greeting {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public Greeting(Registration registration) {
+        this.registration = registration;
     }
 
     public Greeting(HashMap<String, Double> hashMap, Registration registration, Authorized authorized) {
@@ -25,39 +32,39 @@ public class Greeting {
 
     public void greetingMetod(){
         Scanner scanner = new Scanner(System.in);
-        String line;
+        String response;
+        //выбираем варианты
+        System.out.println("Добрый день!");
         boolean flag = true;
         while(flag) {
-            System.out.println("Добрый день!\n " +
-                    "Выберите нужный вариант.\n" +
-                    "Напишите 1, если Вы хотите зарегистрироваться\n" +
-                    "Нажмите 2, если Вы уже наш клиент\n" +
-                    "Нажмите 0, чтобы завершить работу программы");
-            line = scanner.nextLine();
-            switch (line) {
+            System.out.println("Выберите нужный вариант" +
+                    "\n-------------------------------------------------------" +
+                    "\nвведите 1, если хотите зарегистрироваться в системе" +
+                    "\nвведите 2, если уже регистрировалиь" +
+                    "\nвведите 0, чтобы завершить работу программы");
+            response = scanner.nextLine();
+            switch (response) {
                 case "0":
-                    System.out.println(line);
-                    System.out.println("Благодарим за визит. До свидания");
+                    System.out.println("Благодарим Вас за визит. До свидания");
+                    flag = false;
                     break;
                 case "1":
                     System.out.println("Запускаю процесс регистрации");
                     waiting();
-                    hashMap = registration.registrationMethod();
-                    flag = false;
+                    registration.registrationMethod();
+                    //hashMap = registration.registrationMethod();
                     break;
                 case "2":
                     System.out.println("Пожалуйста авторизуйтесь:");
                     //запись коллекции должна идти в файл
                     //и после того считываться из файла и идти в авторизацию
-                    authorized.autorizationMethod(hashMap);
+                    //authorized.autorizationMethod();
                     waiting();
                     break;
                 default:
                     System.out.println("Неизвестная команда. Попробуйте '1', '2' или '0'.");
-                    break;
             }//switch
-        scanner.close();
+            //System.out.println(hashMap);
         }//while
-    System.out.println(hashMap);
     }
 }
